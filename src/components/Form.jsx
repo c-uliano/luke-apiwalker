@@ -1,46 +1,45 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Form = (props) => {
-    // state
-    const [searchAPI, setSearchAPI] = useState({
-        searched: '',
-        id: ''
-    });
+    // * state via props
+    const {search, setSearched, id, setId, setResults} = props;
 
-    const {list, setList} = props;
-
-    // event handlers
-    // ! can the same onChangeHandler be added to both inputs? How does setSearchAPI know which key to update when?
-    const onChangeHandler = (e) => {
-        setSearchAPI({
-            ...searchAPI, [e.target.name]: e.target.value,
-        });
-    }
-
-    const onChangeHandlerTwo = (e) => {
-        setSearchAPI({
-            ...searchAPI, [e.target.name]: e.target.value
-        });
-    }
+    // const navigate = useNavigate();
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        setList([...list, searchAPI]);
-        setSearchAPI({
-            searched: '',
-            id: ''
-        });
+
+        // axios.get(`https://swapi.dev/api/${search}/${id}`)
+        // .then(response=>{setResults(response.data)})
+        // .catch(err => console.log(err));
+
+        // setSearch({
+        //     searched: "",
+        //     id: ""
+        // });
+        // navigate("/:search/:id");
     }
+
+    // const onChangeHandler = (e) => {
+    //     setSearched({...search, [e.target.name]: e.target.value });
+        
+    // }
 
     return (
         <form onSubmit={onSubmitHandler}>
             <div className="mb-3">
                 <label htmlFor="searched" className="form-label"><b>Search For</b></label>
-                <input onChange={onChangeHandler} type="text" className="form-control" name="searched" value={searchAPI.searched} id="searched" />
+                <select onChange={(e) => setSearched(e.target.value)} className="form-select">
+                    <option name="searched" value=""></option>
+                    <option name="searched" value="people">People</option>
+                    <option name="searched" value="planets">Planets</option>
+                </select>
             </div>
             <div className="mb-3">
                 <label htmlFor="id" className="form-label"><b>ID:</b></label>
-                <input onChange={onChangeHandlerTwo} type="text" className="form-control" name="id" value={searchAPI.id} id="id" />
+                <input onChange={(e) => setId(e.target.value)} type="number" className="form-control" name="id" id="id" />
             </div>
             <button type='submit' className='btn btn-primary mt-2'>Search</button>
         </form>
