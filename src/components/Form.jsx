@@ -11,9 +11,9 @@ const Form = (props) => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        // axios.get(`https://swapi.dev/api/${search}/${id}`)
-        // .then(response=>{setResults(response.data)})
-        // .catch(err => console.log(err));
+        axios.get(`https://swapi.dev/api/${search}/${id}`)
+        .then(response=>{setResults(response.data)})
+        .catch(err => console.log(err));
 
         // setSearch({
         //     searched: "",
