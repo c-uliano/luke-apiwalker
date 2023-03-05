@@ -1,6 +1,7 @@
 import './App.css';
 import Form from './components/Form';
 import Display from './components/Display';
+import People from './components/People';
 import { Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -24,12 +25,13 @@ function App() {
             setResults={setResults}
             />
 
-            <Display
+            {/* <Display
             results={results}
-            />
+            /> */}
 
             <Routes>
-                <Route path="/:search/:id" element={<Display results={results} />} />
+                <Route path="/planets/:id" element={<Display results={results} />} />
+                <Route path="/people/:id" element={<People id={id} />} />
             </Routes>
         </div>
     );
